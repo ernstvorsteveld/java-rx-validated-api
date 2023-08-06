@@ -1,12 +1,11 @@
 package com.sternitc.javarxvalidatedapi.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.fge.jsonpatch.JsonPatch;
 import com.sternitc.generated.api.EmployeesApi;
 import com.sternitc.generated.model.*;
 import com.sternitc.javarxvalidatedapi.api.create.CreateEmployeeService;
 import com.sternitc.javarxvalidatedapi.api.get.GetEmployeeService;
-import com.sternitc.javarxvalidatedapi.domain.Employee;
+import com.sternitc.javarxvalidatedapi.api.patch.PatchEmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +14,6 @@ import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.net.URI;
 
 @AllArgsConstructor

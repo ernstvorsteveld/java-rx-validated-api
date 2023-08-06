@@ -1,4 +1,4 @@
-package com.sternitc.javarxvalidatedapi.api;
+package com.sternitc.javarxvalidatedapi.api.patch;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,21 +1,17 @@
 package com.sternitc.javarxvalidatedapi.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.deser.DeserializationProblemHandler;
-import com.github.fge.jsonpatch.JsonPatch;
 import com.sternitc.javarxvalidatedapi.api.dao.EmployeeDao;
 import com.sternitc.javarxvalidatedapi.api.get.GetEmployeeService;
+import com.sternitc.javarxvalidatedapi.api.patch.PatchEmployeeService;
+import com.sternitc.javarxvalidatedapi.api.patch.PatchEmployeeServiceImpl;
 import com.sternitc.javarxvalidatedapi.domain.Employee;
 import com.sternitc.javarxvalidatedapi.domain.Name;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PatchEmployeeServiceImplTest {
 

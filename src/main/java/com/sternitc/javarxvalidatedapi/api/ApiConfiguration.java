@@ -7,6 +7,8 @@ import com.sternitc.javarxvalidatedapi.api.dao.EmployeeDao;
 import com.sternitc.javarxvalidatedapi.api.dao.EmployeeDaoImpl;
 import com.sternitc.javarxvalidatedapi.api.get.GetEmployeeService;
 import com.sternitc.javarxvalidatedapi.api.get.GetEmployeeServiceImpl;
+import com.sternitc.javarxvalidatedapi.api.patch.PatchEmployeeService;
+import com.sternitc.javarxvalidatedapi.api.patch.PatchEmployeeServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.IdGenerator;
