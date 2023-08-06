@@ -17,14 +17,6 @@ class PatchEmployeeServiceImplTest {
 
     @Test
     public void should_path_employee() throws IOException {
-        GetEmployeeService getEmployeeService = new GetEmployeeService() {
-            @Override
-            public Employee get(String id) {
-                Employee employee = new Employee(new Name("John", "", "Doe"), new Date());
-                employee.setId(UUID.randomUUID());
-                return employee;
-            }
-        };
         ObjectMapper mapper = new ObjectMapper();
         EmployeeDao employeeDao = new EmployeeDao() {
             @Override
@@ -42,10 +34,12 @@ class PatchEmployeeServiceImplTest {
                 return null;
             }
         };
-        PatchEmployeeService service = new PatchEmployeeServiceImpl(getEmployeeService, mapper, employeeDao);
+        PatchEmployeeService service = new PatchEmployeeServiceImpl(mapper, employeeDao);
 
+        Employee employee = new Employee(new Name("John", "", "Doe"), new Date());
+        employee.setId(UUID.randomUUID());
         String patchString = "[{ \"op\": \"replace\", \"path\": \"/name/first\", \"value\": \"changed\" }]";
-        service.patch(UUID.randomUUID().toString(), patchString);
+        service.patch(employee, patchString);
     }
 
 }

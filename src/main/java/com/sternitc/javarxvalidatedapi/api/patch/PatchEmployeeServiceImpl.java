@@ -17,15 +17,13 @@ import java.io.InputStream;
 @AllArgsConstructor
 public class PatchEmployeeServiceImpl implements PatchEmployeeService {
 
-    private final GetEmployeeService getEmployeeService;
     private final ObjectMapper mapper;
     private final EmployeeDao employeeDao;
 
     @Override
-    public Employee patch(String id, String patch) {
-        Employee employee = this.getEmployeeService.get(id);
+    public Employee patch(Employee employee, String patch) {
         Employee patchedEmployee = applyPatch(toJsonPatch(patch), employee);
-        return employeeDao.update(id, patchedEmployee);
+        return employeeDao.update(employee.getId().toString(), patchedEmployee);
     }
 
     private JsonPatch toJsonPatch(String patch) {
@@ -55,16 +53,6 @@ public class PatchEmployeeServiceImpl implements PatchEmployeeService {
         public PatchException(Exception e) {
             super(e);
         }
-    }
-
-    @Override
-    public Employee lookup(String id) {
-        return getEmployeeService.get(id);
-    }
-
-    @Override
-    public Employee asObject(JsonNode employee) {
-        return mapper.convertValue(employee, Employee.class);
     }
 
 }

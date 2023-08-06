@@ -33,10 +33,9 @@ public class ApiConfiguration {
 
     @Bean
     public PatchEmployeeService patchEmployeeService(
-            GetEmployeeService getEmployeeService,
             ObjectMapper objectMapper,
             EmployeeDao employeeDao) {
-        return new PatchEmployeeServiceImpl(getEmployeeService, objectMapper, employeeDao);
+        return new PatchEmployeeServiceImpl(objectMapper, employeeDao);
     }
 
 }

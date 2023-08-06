@@ -6,6 +6,7 @@ import com.sternitc.generated.model.*;
 import com.sternitc.javarxvalidatedapi.api.create.CreateEmployeeService;
 import com.sternitc.javarxvalidatedapi.api.get.GetEmployeeService;
 import com.sternitc.javarxvalidatedapi.api.patch.PatchEmployeeService;
+import com.sternitc.javarxvalidatedapi.domain.Employee;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -63,9 +64,10 @@ public class EmployeesApiResource implements EmployeesApi {
             @Pattern(regexp = "uuid") @PathVariable("id") String id,
             @Valid @RequestBody Mono<String> patchEmployeeRequest,
             final ServerWebExchange exchange) {
+        Employee employee = getEmployeeService.get(id);
         return patchEmployeeRequest
                 .log()
-                .map(p -> patchEmployeeService.patch(id, p))
+                .map(p -> patchEmployeeService.patch(employee, p))
                 .map(e -> new ResponseBuilder(exchange)
                         .patched(EmployeeMapper.INSTANCE.toPatchResponse(e)));
     }

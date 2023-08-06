@@ -53,7 +53,7 @@ class EmployeesApiResourceTest {
                 .expectBody(GetEmployeeResponse.class)
                 .value(r -> r.getFirstName(), equalTo("John"))
                 .value(r -> r.getLastName(), equalTo("Doe"))
-                .value(r -> r.getDateOfBirth(), equalTo("2017-07-21"));
+                .value(r -> r.getDateOfBirth(), equalTo("21/07/2017, 00:00"));
     }
 
     @Test
