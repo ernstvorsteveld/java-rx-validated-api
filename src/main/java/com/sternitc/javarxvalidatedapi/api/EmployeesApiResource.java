@@ -1,8 +1,10 @@
 package com.sternitc.javarxvalidatedapi.api;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sternitc.generated.api.EmployeesApi;
-import com.sternitc.generated.model.*;
+import com.sternitc.generated.model.CreateEmployeeRequest;
+import com.sternitc.generated.model.CreateEmployeeResponse;
+import com.sternitc.generated.model.GetEmployeeResponse;
+import com.sternitc.generated.model.PatchEmployeeResponse;
 import com.sternitc.javarxvalidatedapi.api.create.CreateEmployeeService;
 import com.sternitc.javarxvalidatedapi.api.get.GetEmployeeService;
 import com.sternitc.javarxvalidatedapi.api.patch.PatchEmployeeService;
@@ -25,7 +27,6 @@ public class EmployeesApiResource implements EmployeesApi {
     private GetEmployeeService getEmployeeService;
     private CreateEmployeeService createEmployeeService;
     private PatchEmployeeService patchEmployeeService;
-    private ObjectMapper objectMapper;
 
     @RequestMapping(
             method = RequestMethod.POST
@@ -37,7 +38,7 @@ public class EmployeesApiResource implements EmployeesApi {
         return createEmployeeRequest
                 .map(EmployeeMapper.INSTANCE::toCreateCommand)
                 .map(createEmployeeService::create)
-                .map(uuid -> new ResponseBuilder(exchange).created(uuid));
+                .map(id -> new ResponseBuilder(exchange).created(id));
     }
 
     @RequestMapping(
@@ -75,7 +76,7 @@ public class EmployeesApiResource implements EmployeesApi {
     private record ResponseBuilder(ServerWebExchange exchange) {
         public ResponseEntity<CreateEmployeeResponse> created(String uuid) {
             return ResponseEntity
-                    .created(URI.create(exchange.getRequest().getURI().toString() + "/" + uuid))
+                    .created(URI.create(exchange.getRequest().getURI() + "/" + uuid))
                     .build();
         }
 
