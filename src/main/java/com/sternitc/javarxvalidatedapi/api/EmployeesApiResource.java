@@ -63,7 +63,7 @@ public class EmployeesApiResource implements EmployeesApi {
     )
     public Mono<ResponseEntity<PatchEmployeeResponse>> patchEmployee(
             @Pattern(regexp = "uuid") @PathVariable("id") String id,
-            @Valid @RequestBody Mono<String> patchEmployeeRequest,
+            @Valid @RequestBody Mono<byte[]> patchEmployeeRequest,
             final ServerWebExchange exchange) {
         Employee employee = getEmployeeService.get(id);
         return patchEmployeeRequest

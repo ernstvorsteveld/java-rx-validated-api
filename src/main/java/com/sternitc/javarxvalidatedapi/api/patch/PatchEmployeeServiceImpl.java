@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
 import com.github.fge.jsonpatch.JsonPatchException;
 import com.sternitc.javarxvalidatedapi.api.dao.EmployeeDao;
-import com.sternitc.javarxvalidatedapi.api.get.GetEmployeeService;
 import com.sternitc.javarxvalidatedapi.domain.Employee;
 import lombok.AllArgsConstructor;
 
@@ -21,15 +20,14 @@ public class PatchEmployeeServiceImpl implements PatchEmployeeService {
     private final EmployeeDao employeeDao;
 
     @Override
-    public Employee patch(Employee employee, String patch) {
+    public Employee patch(Employee employee, byte[] patch) {
         Employee patchedEmployee = applyPatch(toJsonPatch(patch), employee);
         return employeeDao.update(employee.getId().toString(), patchedEmployee);
     }
 
-    private JsonPatch toJsonPatch(String patch) {
+    private JsonPatch toJsonPatch(byte[] patch) {
         try {
-            InputStream in = new ByteArrayInputStream(patch.getBytes());
-            return mapper.readValue(in, JsonPatch.class);
+            return mapper.readValue(new ByteArrayInputStream(patch), JsonPatch.class);
         } catch (JsonProcessingException e) {
             throw new PatchException(e);
         } catch (IOException e) {

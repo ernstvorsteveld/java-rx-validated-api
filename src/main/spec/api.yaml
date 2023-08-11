@@ -71,7 +71,7 @@ paths:
           application/json-patch+json:
             schema:
               type: string
-              format: RFC 6902
+              format: byte
       responses:
         200:
           description: Ok

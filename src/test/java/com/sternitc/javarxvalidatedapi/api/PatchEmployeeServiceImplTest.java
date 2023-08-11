@@ -2,7 +2,6 @@ package com.sternitc.javarxvalidatedapi.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sternitc.javarxvalidatedapi.api.dao.EmployeeDao;
-import com.sternitc.javarxvalidatedapi.api.get.GetEmployeeService;
 import com.sternitc.javarxvalidatedapi.api.patch.PatchEmployeeService;
 import com.sternitc.javarxvalidatedapi.api.patch.PatchEmployeeServiceImpl;
 import com.sternitc.javarxvalidatedapi.domain.Employee;
@@ -39,7 +38,7 @@ class PatchEmployeeServiceImplTest {
         Employee employee = new Employee(new Name("John", "", "Doe"), new Date());
         employee.setId(UUID.randomUUID());
         String patchString = "[{ \"op\": \"replace\", \"path\": \"/name/first\", \"value\": \"changed\" }]";
-        service.patch(employee, patchString);
+        service.patch(employee, patchString.getBytes());
     }
 
 }
