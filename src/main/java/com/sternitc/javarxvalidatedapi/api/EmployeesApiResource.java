@@ -9,6 +9,7 @@ import com.sternitc.javarxvalidatedapi.api.create.CreateEmployeeService;
 import com.sternitc.javarxvalidatedapi.api.get.GetEmployeeService;
 import com.sternitc.javarxvalidatedapi.api.patch.PatchEmployeeService;
 import com.sternitc.javarxvalidatedapi.domain.Employee;
+import io.micrometer.core.annotation.Timed;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,7 @@ public class EmployeesApiResource implements EmployeesApi {
             method = RequestMethod.POST
     )
     @Override
+    @Timed(value = "create.employee.time", description = "Time taken to create an employee")
     public Mono<ResponseEntity<CreateEmployeeResponse>> createEmployee(
             @Valid @RequestBody Mono<CreateEmployeeRequest> createEmployeeRequest,
             final ServerWebExchange exchange) {
